@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import './App.css';
-import Test from './components/Test'
+import React, { Component } from 'react'
+import './App.css'
+import Card from './components/Card'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Test />
+        <Card />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

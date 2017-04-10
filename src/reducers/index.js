@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import test from './test'
+import card from './card'
 
 const reducer = combineReducers({
-  test,
+  card,
 })
 
 export default reducer
