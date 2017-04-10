@@ -11,6 +11,7 @@ const propTypes = {
 
 const cardSource = {
   canDrag(props) {
+    // You can disallow drag based on props
     return props.draggable
   },
   beginDrag(props) {

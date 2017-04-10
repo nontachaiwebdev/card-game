@@ -26,24 +26,61 @@ class Board extends React.Component {
     },
   }
 
-  move(targetId, sourceId) {
+  move(targetSlotId, sourceCardId) {
     const { cards, slots } = this.state
-    this.setState({
-      slots: {
-        ...slots,
-        [targetId]: {
-          ...slots[targetId],
-          cardId: sourceId,
+    console.log('targetSlotId', targetSlotId)
+    console.log('sourceCardId', sourceCardId)
+    const sourceSlotId = cards[sourceCardId].slotId
+    const targetCardId = slots[targetSlotId].cardId
+    console.log('sourceSlotId', sourceSlotId)
+    console.log('targetCardId', targetCardId)
+    if (slots[targetSlotId].cardId) {
+      // const sourceCardId = cards[sourceId].id
+      // const targetCardId = slots[targetSlotId].cardId
+      // console.log('sourceCardId', sourceCardId)
+      // console.log('targetCardId', targetCardId)
+      this.setState({
+        slots: {
+          ...slots,
+          [targetSlotId]: {
+            ...slots[targetSlotId],
+            cardId: sourceCardId,
+          },
+          [sourceSlotId]: {
+            ...slots[sourceSlotId],
+            cardId: targetCardId,
+          },
         },
-      },
-      cards: {
-        ...cards,
-        [sourceId]: {
-          ...cards[sourceId],
-          slotId: targetId,
+        cards: {
+          ...cards,
+          [sourceCardId]: {
+            ...cards[sourceCardId],
+            slotId: targetSlotId,
+          },
+          [targetCardId]: {
+            ...cards[targetCardId],
+            slotId: sourceSlotId,
+          },
         },
-      },
-    })
+      })
+    } else {
+      this.setState({
+        slots: {
+          ...slots,
+          [targetSlotId]: {
+            ...slots[targetSlotId],
+            cardId: sourceCardId,
+          },
+        },
+        cards: {
+          ...cards,
+          [sourceCardId]: {
+            ...cards[sourceCardId],
+            slotId: targetSlotId,
+          },
+        },
+      })
+    }
   }
   render() {
     const { cards, slots } = this.state
