@@ -6,7 +6,6 @@ const { string, number } = PropTypes
 const propTypes = {
   id: number,
   letter: string,
-  slotId: number,
 }
 
 const cardSource = {

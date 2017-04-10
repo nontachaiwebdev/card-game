@@ -73,7 +73,7 @@ class Board extends React.Component {
           },
         },
       })
-    } else if(slots[targetSlotId].cardId) {
+    } else if (slots[targetSlotId].cardId) {
       this.setState({
         slots: {
           ...slots,
@@ -123,7 +123,8 @@ class Board extends React.Component {
       <div>
         <div className="flex">
           {map(cards).filter(({ slotId }) => !slotId).map((card, key) => (
-            <Card key={key}
+            <Card
+              key={key}
               {...card}
             />
           ))}
