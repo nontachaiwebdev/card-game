@@ -30,6 +30,7 @@ class Board extends React.Component {
     const { cards, slots } = this.state
     const sourceSlotId = cards[sourceCardId].slotId
     const targetCardId = slots[targetSlotId].cardId
+    console.log(this.state)
     if (!cards[sourceCardId].slotId && slots[targetSlotId].cardId) {
       this.setState({
         slots: {
@@ -48,6 +49,27 @@ class Board extends React.Component {
           [targetCardId]: {
             ...cards[targetCardId],
             slotId: null,
+          },
+        },
+      })
+    } else if (cards[sourceCardId].slotId && !slots[targetSlotId].cardId) {
+      this.setState({
+        slots: {
+          ...slots,
+          [targetSlotId]: {
+            ...slots[targetSlotId],
+            cardId: sourceCardId,
+          },
+          [sourceSlotId]: {
+            ...slots[sourceSlotId],
+            cardId: null,
+          },
+        },
+        cards: {
+          ...cards,
+          [sourceCardId]: {
+            ...cards[sourceCardId],
+            slotId: targetSlotId,
           },
         },
       })
