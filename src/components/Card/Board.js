@@ -28,17 +28,9 @@ class Board extends React.Component {
 
   move(targetSlotId, sourceCardId) {
     const { cards, slots } = this.state
-    console.log('targetSlotId', targetSlotId)
-    console.log('sourceCardId', sourceCardId)
     const sourceSlotId = cards[sourceCardId].slotId
     const targetCardId = slots[targetSlotId].cardId
-    console.log('sourceSlotId', sourceSlotId)
-    console.log('targetCardId', targetCardId)
     if (slots[targetSlotId].cardId) {
-      // const sourceCardId = cards[sourceId].id
-      // const targetCardId = slots[targetSlotId].cardId
-      // console.log('sourceCardId', sourceCardId)
-      // console.log('targetCardId', targetCardId)
       this.setState({
         slots: {
           ...slots,

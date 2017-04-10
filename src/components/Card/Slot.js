@@ -19,12 +19,6 @@ const slotTarget = {
     return canDropCard(item)
   },
   drop(props, monitor) {
-    console.log(props)
-    // if (props.cardId) {
-    //   props.onMove({ sourceId: props.cardId, targetId: props.id })
-    // } else {
-    //   props.onMove({ sourceId: monitor.getItem().id, targetId: props.id })
-    // }
     const id = monitor.getItem().id
     props.onMove({ sourceId: id, targetId: props.id })
   },
