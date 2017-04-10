@@ -36,6 +36,13 @@ class Board extends React.Component {
           cardId: sourceId,
         },
       },
+      cards: {
+        ...cards,
+        [sourceId]: {
+          ...cards[sourceId],
+          slotId: targetId,
+        },
+      },
     })
   }
   render() {
