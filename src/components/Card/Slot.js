@@ -1,29 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { DropTarget } from 'react-dnd'
 import { CARD } from './ItemTypes'
-import Card from './Card'
 
-const { number, string } = PropTypes
+const { func } = PropTypes
 
 const propTypes = {
-  cardId: number,
-  letter: string,
-  slotId: number,
+  connectDropTarget: func,
 }
 
-const canDropCard = (slotId) => true
+const canDropCard = () => true
 
 const slotTarget = {
   canDrop(props, monitor) {
     const item = monitor.getItem()
-    return canDropCard(item)
+    return canDropCard()
   },
   drop(props, monitor) {
     const id = monitor.getItem().id
     props.onMove({ sourceId: id, targetId: props.id })
-  },
-  hover(props) {
-    // console.log(props)
   },
 }
 
@@ -40,7 +34,6 @@ function collect(connect, monitor) {
 class Slot extends Component {
   render() {
     const { connectDropTarget } = this.props
-
     return connectDropTarget(
       <div>
         <div className="slot">
