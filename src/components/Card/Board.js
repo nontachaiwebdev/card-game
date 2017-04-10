@@ -17,8 +17,8 @@ const propTypes = {
 class Board extends React.Component {
   state = {
     cards: {
-      1: { id: 1, slotId: null, letter: '1' },
-      2: { id: 2, slotId: null, letter: '2' },
+      1: { id: 1, slotId: null, letter: '1', draggable: true },
+      2: { id: 2, slotId: null, letter: '2', draggable: true },
     },
     slots: {
       1: { id: 1, cardId: null },
@@ -51,7 +51,9 @@ class Board extends React.Component {
       <div>
         <div className="flex">
           {map(cards).filter(({ slotId }) => !slotId).map((card, key) => (
-            <Card key={key} {...card} />
+            <Card key={key}
+              {...card}
+            />
           ))}
         </div>
         <div className="flex">
@@ -62,7 +64,9 @@ class Board extends React.Component {
               onMove={({ targetId, sourceId }) =>
               this.move(targetId, sourceId)}
             >
-              <Card {...cards[slot.cardId]} />
+              <Card
+                {...cards[slot.cardId]}
+              />
             </Slot>
           ))}
         </div>

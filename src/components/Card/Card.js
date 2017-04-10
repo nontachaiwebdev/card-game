@@ -10,6 +10,9 @@ const propTypes = {
 }
 
 const cardSource = {
+  canDrag(props) {
+    return props.draggable
+  },
   beginDrag(props) {
     // Return the data describing the dragged item
     const { id } = props
@@ -20,6 +23,7 @@ const cardSource = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    canDrag: monitor.canDrag(),
     isDragging: monitor.isDragging(),
   }
 }
