@@ -28,94 +28,38 @@ class Board extends React.Component {
 
   move(targetSlotId, sourceCardId) {
     const { cards, slots } = this.state
-    const sourceSlotId = cards[sourceCardId].slotId
-    const targetCardId = slots[targetSlotId].cardId
-    console.log(this.state)
-    if (!cards[sourceCardId].slotId && slots[targetSlotId].cardId) {
-      this.setState({
-        slots: {
-          ...slots,
-          [targetSlotId]: {
-            ...slots[targetSlotId],
-            cardId: sourceCardId,
-          },
-        },
-        cards: {
-          ...cards,
-          [sourceCardId]: {
-            ...cards[sourceCardId],
-            slotId: targetSlotId,
-          },
-          [targetCardId]: {
-            ...cards[targetCardId],
-            slotId: null,
-          },
-        },
-      })
-    } else if (cards[sourceCardId].slotId && !slots[targetSlotId].cardId) {
-      this.setState({
-        slots: {
-          ...slots,
-          [targetSlotId]: {
-            ...slots[targetSlotId],
-            cardId: sourceCardId,
-          },
-          [sourceSlotId]: {
-            ...slots[sourceSlotId],
-            cardId: null,
-          },
-        },
-        cards: {
-          ...cards,
-          [sourceCardId]: {
-            ...cards[sourceCardId],
-            slotId: targetSlotId,
-          },
-        },
-      })
-    } else if (slots[targetSlotId].cardId) {
-      this.setState({
-        slots: {
-          ...slots,
-          [targetSlotId]: {
-            ...slots[targetSlotId],
-            cardId: sourceCardId,
-          },
-          [sourceSlotId]: {
-            ...slots[sourceSlotId],
-            cardId: targetCardId,
-          },
-        },
-        cards: {
-          ...cards,
-          [sourceCardId]: {
-            ...cards[sourceCardId],
-            slotId: targetSlotId,
-          },
-          [targetCardId]: {
-            ...cards[targetCardId],
-            slotId: sourceSlotId,
-          },
-        },
-      })
-    } else {
-      this.setState({
-        slots: {
-          ...slots,
-          [targetSlotId]: {
-            ...slots[targetSlotId],
-            cardId: sourceCardId,
-          },
-        },
-        cards: {
-          ...cards,
-          [sourceCardId]: {
-            ...cards[sourceCardId],
-            slotId: targetSlotId,
-          },
-        },
-      })
+    const sourceCard = sourceCardId ? cards[sourceCardId] : null
+    const targetSlot = targetSlotId ? slots[targetSlotId] : null
+    const newSlot = sourceCard.slotId && {
+      [sourceCard.slotId]: {
+        ...slots[sourceCard.slotId],
+        cardId: targetSlot.cardId,
+      },
     }
+    const newCard = targetSlot.cardId && {
+      [targetSlot.cardId]: {
+        ...cards[targetSlot.cardId],
+        slotId: sourceCard.slotId,
+      },
+    }
+    this.setState({
+      slots: {
+        ...slots,
+        [targetSlotId]: {
+          ...slots[targetSlotId],
+          cardId: sourceCardId,
+        },
+        ...newSlot,
+      },
+      cards: {
+        ...cards,
+        [sourceCardId]: {
+          ...cards[sourceCardId],
+          slotId: targetSlotId,
+        },
+        ...newCard,
+      },
+    })
   }
   render() {
     const { cards, slots } = this.state
